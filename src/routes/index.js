@@ -22,7 +22,9 @@ const {
     getAllCoupons,
     createCoupon,
     updateCoupon,
-    deleteCoupon
+    deleteCoupon,
+    createUser,
+    deleteUser
 } = require('../controllers/adminController');
 const { submitQuiz, getQuizAttempts, getAttemptDetails } = require('../controllers/quizAttemptController');
 const {
@@ -90,6 +92,9 @@ router.get('/quizzes/:id/results', protect, getQuizAttempts); // Alias for resul
 
 // Admin routes
 router.get('/users', protect, authorize('Admin', 'SuperAdmin'), getAllUsers);
+router.post('/users', protect, authorize('Admin', 'SuperAdmin'), createUser);
+router.put('/users/:id', protect, authorize('Admin', 'SuperAdmin'), updateUser);
+router.delete('/users/:id', protect, authorize('SuperAdmin'), deleteUser);
 router.post('/admin/instructors/:id/review', protect, authorize('Admin', 'SuperAdmin'), reviewInstructor);
 router.get('/admin/analytics/dashboard', protect, authorize('Admin', 'SuperAdmin'), getDashboardStats);
 
